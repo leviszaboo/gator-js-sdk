@@ -1,0 +1,26 @@
+{
+  "name": "gator-sdk",
+  "version": "1.0.0",
+  "description": "Javascript SDK for Gator Authentication",
+  "main": "dist/index.js",
+  "module": "dist/index.m.js",
+  "umd": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap",
+    "prepare": "husky || true"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "author": "Levente Szabo",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "microbundle": "^0.15.1",
+    "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
