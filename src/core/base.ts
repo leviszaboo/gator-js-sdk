@@ -1,4 +1,4 @@
-type GatorConfig = {
+export type GatorConfig = {
   gatorAppId: string;
   gatorAuthApiKey: string;
   gatorAuthApiUrl: string;

@@ -1,2 +1,2 @@
-export * from "./core/user";
-export * from "./core/auth";
+export { User } from "./core/user";
+export { Auth } from "./core/auth";

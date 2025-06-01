@@ -1,11 +1,17 @@
 {
   "name": "gator-sdk",
+  "type": "module",
   "version": "1.0.0",
+  "source": "src/index.ts",
   "description": "Javascript SDK for Gator Authentication",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
   "umd": "dist/index.umd.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.m.js"
+  },
   "scripts": {
     "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap",
     "prepare": "husky || true"
@@ -18,7 +24,8 @@
   "devDependencies": {
     "husky": "^9.0.11",
     "microbundle": "^0.15.1",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "tsx": "^4.16.2"
   },
   "dependencies": {
     "node-fetch": "^3.3.2"

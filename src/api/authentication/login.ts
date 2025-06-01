@@ -1,17 +1,26 @@
 // api/authentication/login.ts
-import { Auth } from "src/core/auth";
-import { RequestOptions, HttpMethod, Endpoint, request } from "../index"; // Adjust the import path as needed
+import { Auth } from "src";
+import { User } from "src";
+import { RequestOptions, HttpMethod, Endpoint, request } from "../utils";
 
 interface LoginRequestBody {
   email: string;
   password: string;
 }
 
+interface LoginResponse {
+  userId: string;
+  email: string;
+  emailVerified: boolean;
+  accessToken: string;
+  refreshToken: string;
+}
+
 export const loginUser = async (
   auth: Auth,
   email: string,
   password: string,
-): Promise<Response | void> => {
+): Promise<User> => {
   const endpoint = Endpoint.LOGIN;
   const method = HttpMethod.POST;
 
@@ -24,10 +33,12 @@ export const loginUser = async (
     request_body: { ...requestBody },
   };
 
-  try {
-    const response = await request(requestOptions);
-    return response;
-  } catch (error) {
-    throw error;
-  }
+  const userData = await request<LoginResponse>(requestOptions);
+
+  const user = new User(userData);
+
+  auth._setAuthState(user);
+  auth._startTokenValidation();
+
+  return user;
 };
